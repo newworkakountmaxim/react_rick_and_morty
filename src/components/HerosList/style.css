@@ -1,0 +1,88 @@
+.Home__ShowcaseWrapper{
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    min-height: calc(60vh - 5rem);
+    padding: 1.875rem;
+    background: rgb(32, 35, 41);
+}
+.Home__ShowcaseInner{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 1260px;
+    min-height: 40vh;
+}
+.CharacterCard__Wrapper{
+    max-width: 300px;
+    margin-bottom: 0.625rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 2px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 0.625rem;
+    overflow: hidden;
+}
+.CharacterCard__ImgWrapper{
+    position: relative;
+    max-width: 300px;
+    max-height: 300px;
+}
+.CharacterCard__ImgWrapper .card-image{
+    width: 300px;
+    height: 300px;
+    background: rgb(32, 35, 41);
+}
+.CharacterCard__ImgWrapper .card-image img{
+    margin: 0px;
+    overflow: hidden;
+}
+.CharacterCard__Title{
+    width: 100%;
+    opacity: 0.8;
+    position: absolute;
+    bottom: 0px;
+    background: rgb(32, 35, 41);
+    padding: 0.625rem;
+}
+.CharacterCard__Name{
+    color: rgb(245, 245, 245);
+    font-size: 1.625rem;
+    font-weight: 400;
+    font-stretch: expanded;
+    margin: 0px;
+}
+.CharacterCard__Description{
+    color: rgb(187, 187, 187);
+    font-size: 0.875rem;
+    margin: 0px;
+}
+.CharacterCard__InfoWrapper{
+    height: 100%;
+    color: rgb(255, 152, 0);
+    padding: 1.25rem;
+    background: rgb(51, 51, 51);
+}
+.CharacterCard__TextWrapper{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 0.75rem 0px 0.375rem;
+    border-bottom: 1px solid rgb(68, 68, 68);
+
+}
+.CharacterCard__TextWrapper span{
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgb(158, 158, 158);
+}
+.CharacterCard__TextWrapper p{
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 200;
+    text-align: right;
+    padding: 0px;
+    margin: 0px;
+}

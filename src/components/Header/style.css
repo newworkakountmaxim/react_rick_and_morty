@@ -1,0 +1,56 @@
+.Header{
+    padding-top: 5vh;
+    display: flex;
+    align-items: center;
+    height: 40vh;
+    text-align: center;
+    flex-direction: column;
+}
+.Home__Title{
+    text-transform: uppercase;
+    line-height: 0.75em;
+    color: rgb(32, 35, 41);
+    font-size: 3.75rem;
+    margin: 0px;
+}
+.Home__SubTitleWrapper{
+    transform: skew(-2deg) translateY(-6px);
+    padding: 0.3125rem 0.25rem 0px;
+    background: rgb(32, 35, 41);
+}
+.Home__SubTitle{
+    text-transform: uppercase;
+    line-height: 0.95em;
+    font-size: 1.875rem;
+    color: rgb(255, 152, 0);
+    transform: skew(2deg);
+    margin: 0px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+.Home__SubTitle::selection{
+    background: transparent;
+}
+.Home__HiddenSubTitle{
+    text-transform: uppercase;
+    line-height: 0.95em;
+    font-size: 1.875rem;
+    transform: skew(2deg);
+    position: absolute;
+    width: 100%;
+    top: 4px;
+    left: 0px;
+    color: transparent;
+    margin: 0px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 0px 0.25rem;
+}
+.Home__HiddenSubTitle::selection{
+    background: rgb(255, 152, 0);
+    color: rgb(32, 35, 41);
+}
