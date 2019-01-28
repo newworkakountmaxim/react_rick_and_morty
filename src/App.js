@@ -19,6 +19,7 @@ class App extends Component {
                 />
                 <Route path="/" exact component={HeroList}/>
                 <Route path="/personage/:id" component={SingleHeroPage}/>
+                <Route path="/page/:pagenum" component={HeroList}/>
             </Fragment>
         </Router>
     );

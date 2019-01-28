@@ -6,20 +6,65 @@ class HeroList extends Component {
 
     state = {
         heros: [],
-        info: {}
+        info: {},
+        pagenum: this.props.match.params.pagenum
     };
 
     createHerosListHTML = () => {
         const {heros} = this.state;
-
+        const {info} = this.state;
+//console.log(info);
         if(heros.length){
             return heros.map(hero => <HeroListElement key={hero.id} hero={hero}/>)
         }
         return <div className="Home__SubTitle">No hero yet</div>
     };
 
+    nextPage = (e) => {
+        e.preventDefault();
+        const {info} = this.state;
+        //let {pagenum} = this.state;
+        //console.log(this.state.pagenum);
+        //count++;
+
+        (info.next ==='') ? console.log('ne ok') :
+            (
+                fetch(info.next)
+                    .then(res => res.json())
+                    .then(res => {
+                        //console.log(res);
+
+                        this.setState({
+                            heros: res.results,
+                            info: res.info,
+                            pagenum: 1*(this.state.pagenum)+1
+                        })
+                    })
+            )
+    }
+    prevPage = (e) => {
+        e.preventDefault();
+        const {info} = this.state;
+
+        (info.prev ==='') ? console.log('ne ok') :
+            (
+                fetch(info.prev)
+                    .then(res => res.json())
+                    .then(res => {
+                        console.log(res);
+                        this.setState({
+                            heros: res.results,
+                            info: res.info,
+                            pagenum: 1*(this.state.pagenum)-1
+                        })
+                    })
+            )
+    }
+
     render() {
-        console.log("render");
+        //console.log("render");
+        //const {pagenum} = this.props.match.params;
+        console.log(this.state);
         return(
             <Fragment>
                 <section className="Home__ShowcaseWrapper">
@@ -30,21 +75,21 @@ class HeroList extends Component {
                     </div>
                 </section>
                 <section>
-                    <a href="">Prev</a>
-                    <span>25</span>
-                    <a href="">Next</a>
+                    <a href="#" onClick={this.prevPage}>Prev</a>
+                    <span>{this.state.pagenum}</span>
+                    <a href="#" onClick={this.nextPage}>Next</a>
                 </section>
             </Fragment>
         )
     }
 
     componentDidMount() {
-        console.log("componentDidMount");
-
-        fetch("https://rickandmortyapi.com/api/character/?page=25")
+        //console.log("componentDidMount");
+        const {pagenum} = this.props.match.params;
+        fetch(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
             .then(res => res.json())
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 this.setState({
                     heros: res.results,
                     info: res.info,
