@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react';
 import './style.css';
 import HeroListElement from "../HeroListElement";
 
+import Pagination from "../Pagination";
+
 class HeroList extends Component {
 
     state = {
@@ -20,50 +22,47 @@ class HeroList extends Component {
         return <div className="Home__SubTitle">No hero yet</div>
     };
 
-    nextPage = (e) => {
-        e.preventDefault();
-        const {info} = this.state;
-        //let {pagenum} = this.state;
-        //console.log(this.state.pagenum);
-        //count++;
-
-        (info.next ==='') ? console.log('ne ok') :
-            (
-                fetch(info.next)
-                    .then(res => res.json())
-                    .then(res => {
-                        //console.log(res);
-
-                        this.setState({
-                            heros: res.results,
-                            info: res.info,
-                            pagenum: 1*(this.state.pagenum)+1
-                        })
-                    })
-            )
-    }
-    prevPage = (e) => {
-        e.preventDefault();
-        const {info} = this.state;
-
-        (info.prev ==='') ? console.log('ne ok') :
-            (
-                fetch(info.prev)
-                    .then(res => res.json())
-                    .then(res => {
-                        console.log(res);
-                        this.setState({
-                            heros: res.results,
-                            info: res.info,
-                            pagenum: 1*(this.state.pagenum)-1
-                        })
-                    })
-            )
-    }
+    // nextPage = (e) => {
+    //     e.preventDefault();
+    //     const {info} = this.state;
+    //
+    //     (info.next ==='') ? console.log('ne ok') :
+    //         (
+    //             fetch(info.next)
+    //                 .then(res => res.json())
+    //                 .then(res => {
+    //                     //console.log(res);
+    //
+    //                     this.setState({
+    //                         heros: res.results,
+    //                         info: res.info,
+    //                         pagenum: 1*(this.state.pagenum)+1
+    //                     })
+    //                 })
+    //         )
+    // }
+    // prevPage = (e) => {
+    //     e.preventDefault();
+    //     const {info} = this.state;
+    //
+    //     (info.prev ==='') ? console.log('ne ok') :
+    //         (
+    //             fetch(info.prev)
+    //                 .then(res => res.json())
+    //                 .then(res => {
+    //                     console.log(res);
+    //                     this.setState({
+    //                         heros: res.results,
+    //                         info: res.info,
+    //                         pagenum: 1*(this.state.pagenum)-1
+    //                     })
+    //                 })
+    //         )
+    // }
 
     render() {
         //console.log("render");
-        //const {pagenum} = this.props.match.params;
+        const {pagenum} = this.props.match.params;
         console.log(this.state);
         return(
             <Fragment>
@@ -74,10 +73,11 @@ class HeroList extends Component {
 
                     </div>
                 </section>
-                <section>
-                    <a href="#" onClick={this.prevPage}>Prev</a>
-                    <span>{this.state.pagenum}</span>
-                    <a href="#" onClick={this.nextPage}>Next</a>
+                <section className = "Pagination___Wrapper">
+                    {/*<a href="#" onClick={this.prevPage}>Prev</a>*/}
+                    {/*<span>{this.state.pagenum}</span>*/}
+                    {/*<a href="#" onClick={this.nextPage}>Next</a>*/}
+                    <Pagination pagenum={pagenum} info={this.state.info}/>
                 </section>
             </Fragment>
         )
