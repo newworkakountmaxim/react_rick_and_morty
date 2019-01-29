@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Link} from 'react-router-dom';
+
 function HeroListElement(props) {
 
     const {id, image, name, status, species, gender, origin, location} = props.hero;
@@ -26,7 +28,7 @@ function HeroListElement(props) {
                     <p>{location.name}</p>
                 </div>
                 <div className="CharacterCard__TextWrapper">
-                    <a href={`/personage/${id}`}>Show more...</a>
+                    <Link to={`/personage/${id}`}>Show more...</Link>
                 </div>
             </div>
         </article>
