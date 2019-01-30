@@ -10,13 +10,28 @@ class HeroList extends Component {
     state = {
         heros: [],
         info: {},
-        pagenum: this.props.match.params.pagenum
+        //pagenum: this.props.match.params.pagenum
     };
+
+    componentWillReceiveProps(nextProps, nextContext){
+        const {pagenum} = nextProps.match.params;
+        this.getPersonageData(pagenum);
+    }
+
+    getPersonageData = (pagenum) => {
+        fetchPersonageData(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
+            .then(res => {
+                this.setState({
+                    heros: res.results,
+                    info: res.info,
+                })
+            })
+    }
 
     createHerosListHTML = () => {
         const {heros} = this.state;
         const {info} = this.state;
-//console.log(info);
+
         if(heros.length){
             return heros.map(hero => <HeroListElement key={hero.id} hero={hero}/>)
         }
@@ -88,13 +103,7 @@ class HeroList extends Component {
         const {pagenum} = this.props.match.params;
         // fetch(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
         //     .then(res => res.json())
-        fetchPersonageData(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
-            .then(res => {
-                this.setState({
-                    heros: res.results,
-                    info: res.info,
-                })
-            })
+        this.getPersonageData(pagenum);
     }
 }
 
