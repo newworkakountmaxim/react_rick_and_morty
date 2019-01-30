@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from 'react';
 import './style.css';
 import HeroListElement from "../HeroListElement";
-
 import Pagination from "../Pagination";
+
+import fetchPersonageData from '../../services/fetch-data';
 
 class HeroList extends Component {
 
@@ -84,12 +85,11 @@ class HeroList extends Component {
     }
 
     componentDidMount() {
-        //console.log("componentDidMount");
         const {pagenum} = this.props.match.params;
-        fetch(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
-            .then(res => res.json())
+        // fetch(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
+        //     .then(res => res.json())
+        fetchPersonageData(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
             .then(res => {
-                //console.log(res);
                 this.setState({
                     heros: res.results,
                     info: res.info,
