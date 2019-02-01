@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 function HeroListElement(props) {
 
     const {id, image, name, status, species, gender, origin, location} = props.hero;
+    const nolink = props.nolinkmore;
 
     return(
         <article className="CharacterCard__Wrapper">
@@ -27,9 +28,12 @@ function HeroListElement(props) {
                 <div className="CharacterCard__TextWrapper"><span>LAST LOCATION</span>
                     <p>{location.name}</p>
                 </div>
-                <div className="CharacterCard__TextWrapper">
-                    <Link to={`/personage/${id}`}>Show more...</Link>
-                </div>
+                {
+                    nolink? '' :
+                        <div className="CharacterCard__TextWrapper">
+                            <Link to={`/personage/${id}`}>Show more...</Link>
+                        </div>
+                }
             </div>
         </article>
     )

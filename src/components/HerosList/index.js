@@ -10,15 +10,47 @@ class HeroList extends Component {
     state = {
         heros: [],
         info: {},
-        //pagenum: this.props.match.params.pagenum
+        pagenum: this.props.match.params.pagenum
     };
 
-    componentWillReceiveProps(nextProps, nextContext){
-        const {pagenum} = nextProps.match.params;
-        this.getPersonageData(pagenum);
+
+
+    static getDerivedStateFromProps(props, state){
+
+        //console.log('aaaaaaaaa');
+        // console.log(state);
+       return {
+           heros:state.heros,
+           info:state.info,
+           pagenum:state.pagenum
+        };
     }
 
+
+    // componentWillUpdate(nextProps, nextState, nextContext) {
+    //     console.log(nextProps);
+    //     console.log(nextState);
+    //     console.log(nextContext);
+    // }
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        console.log(this.state.pagenum);
+        console.log(nextProps.match.params.pagenum);
+        //console.log(nextProps.match.params.pagenum);
+        //nextState.pagenum = nextProps.match.params.pagenum;
+        //console.log(nextState);
+        if (nextProps.match.params.pagenum !== this.state.pagenum)
+            {this.getPersonageData(nextProps.match.params.pagenum);}
+        return true;
+
+    }
+
+    // componentWillReceiveProps(nextProps, nextContext){
+    //     const {pagenum} = nextProps.match.params;
+    //     this.getPersonageData(pagenum);
+    // }
+
     getPersonageData = (pagenum) => {
+        //pagenum? pagenum=pagenum : pagenum=1
         fetchPersonageData(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
             .then(res => {
                 this.setState({
@@ -38,62 +70,20 @@ class HeroList extends Component {
         return <div className="Home__SubTitle">No hero yet</div>
     };
 
-    // nextPage = (e) => {
-    //     e.preventDefault();
-    //     const {info} = this.state;
-    //
-    //     (info.next ==='') ? console.log('ne ok') :
-    //         (
-    //             fetch(info.next)
-    //                 .then(res => res.json())
-    //                 .then(res => {
-    //                     //console.log(res);
-    //
-    //                     this.setState({
-    //                         heros: res.results,
-    //                         info: res.info,
-    //                         pagenum: 1*(this.state.pagenum)+1
-    //                     })
-    //                 })
-    //         )
-    // }
-    // prevPage = (e) => {
-    //     e.preventDefault();
-    //     const {info} = this.state;
-    //
-    //     (info.prev ==='') ? console.log('ne ok') :
-    //         (
-    //             fetch(info.prev)
-    //                 .then(res => res.json())
-    //                 .then(res => {
-    //                     console.log(res);
-    //                     this.setState({
-    //                         heros: res.results,
-    //                         info: res.info,
-    //                         pagenum: 1*(this.state.pagenum)-1
-    //                     })
-    //                 })
-    //         )
-    // }
+
 
     render() {
-        //console.log("render");
         const {pagenum} = this.props.match.params;
-        console.log(this.state);
+
         return(
             <Fragment>
                 <section className="Home__ShowcaseWrapper">
                     <div className="Home__ShowcaseInner">
-
                         {this.createHerosListHTML()}
-
                     </div>
                 </section>
                 <section className = "Pagination___Wrapper">
-                    {/*<a href="#" onClick={this.prevPage}>Prev</a>*/}
-                    {/*<span>{this.state.pagenum}</span>*/}
-                    {/*<a href="#" onClick={this.nextPage}>Next</a>*/}
-                    <Pagination pagenum={pagenum} info={this.state.info}/>
+                    <Pagination pagenum={pagenum} info={this.state.info} />
                 </section>
             </Fragment>
         )
@@ -101,8 +91,6 @@ class HeroList extends Component {
 
     componentDidMount() {
         const {pagenum} = this.props.match.params;
-        // fetch(`https://rickandmortyapi.com/api/character/?page=${pagenum}`)
-        //     .then(res => res.json())
         this.getPersonageData(pagenum);
     }
 }

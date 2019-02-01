@@ -5,8 +5,8 @@ import PaginationElement from "../PaginationElement";
 
 function Pagination(props) {
 
-    const {pagenum, info} = props;
-
+    const {pagenum=1, info} = props;
+    //console.log(`isdisabled:: ${isdisabled}`);
     return(
             <nav>
                 <ul className = "Pagination__Nav">

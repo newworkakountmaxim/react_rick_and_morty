@@ -17,7 +17,7 @@ class SingleHeroPage extends Component {
 
         if(error){
             return(
-                <Redirect push to="/"/>
+                <Redirect push to="../404-error"/>
             )
         }
 
@@ -27,10 +27,12 @@ class SingleHeroPage extends Component {
 
                     {
                         Object.keys(hero).length?
-                            <HeroListElement hero={hero} />
+                            <HeroListElement hero={hero} nolinkmore={true}/>
                             :
                             <div>No data yet</div>
                     }
+
+                    {/*{hero.name}*/}
 
                 </div>
             </section>
@@ -38,7 +40,6 @@ class SingleHeroPage extends Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount");
 
         const {id} = this.props.match.params;
 
@@ -52,7 +53,7 @@ class SingleHeroPage extends Component {
                 console.log(err);
                 this.setState({
                     error: true
-                })
+                });
             })
     }
 }
